@@ -79,5 +79,32 @@ function addToCart(p,n){cart.push({n,p});sum+=p;cnt.innerText=cart.length;tot.in
 function orderNow(){if(!cart.length)return alert('السلة فارغة');let t=cart.map(x=>x.n+' - '+x.p).join('%0A');window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent('طلب جديد:\n'+t+'\nالمجموع: '+sum),'_blank');}
 render();
 </script>
+ <!-- فوتر شفاف مع ازرار -->
+<footer style="background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); padding:25px 15px; margin:20px 10px 110px 10px; border-radius:20px; border:1.5px solid #e8dcc6; text-align:center">
+  <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:15px">
+    <button onclick="openPage('about')" style="background:#111;color:#fff;border:0;padding:10px 18px;border-radius:20px;font-weight:700">من نحن</button>
+    <button onclick="openPage('contact')" style="background:#fff;color:#111;border:1.5px solid #111;padding:10px 18px;border-radius:20px;font-weight:700">اتصل بنا</button>
+    <button onclick="openPage('policy')" style="background:#fff;color:#111;border:1.5px solid #e8dcc6;padding:10px 18px;border-radius:20px;font-weight:700">سياسة الخصوصية</button>
+  </div>
+  <div style="font-size:12px;color:#777">© 2026 السوق العصري - جميع الحقوق محفوظة</div>
+</footer>
+
+<!-- صفحات منبثقة -->
+<div id="pageModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:15px" onclick="this.style.display='none'">
+  <div style="background:#fff;max-width:500px;width:100%;border-radius:16px;padding:20px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><h3 id="pageTitle" style="margin:0"></h3><button onclick="document.getElementById('pageModal').style.display='none'" style="background:#111;color:#fff;border:0;width:30px;height:30px;border-radius:50%">✕</button></div>
+    <div id="pageContent" style="line-height:1.8;font-size:14px;color:#333"></div>
+  </div>
+</div>
+
+<script>
+function openPage(type){
+  let t=document.getElementById('pageTitle'), c=document.getElementById('pageContent'), m=document.getElementById('pageModal');
+  if(type==='about'){ t.innerText='من نحن'; c.innerHTML='السوق العصري متجر إلكتروني عراقي متخصص في بيع أجود المنتجات بأفضل الأسعار.<br><br>نوفر لكم منتجات أصلية مع ضمان و توصيل سريع لجميع محافظات العراق.<br><br>هدفنا هو رضاكم وثقتكم بنا.'; }
+  if(type==='contact'){ t.innerText='اتصل بنا'; c.innerHTML='📞 واتساب: 07822642223<br><br>📍 العنوان: الناصرية - العراق<br><br>⏰ أوقات العمل: 8 صباحا - 10 مساءا<br><br><a href="https://wa.me/9647822642223" style="display:block;background:#25D366;color:#fff;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:900;margin-top:15px">راسلنا واتساب مباشر</a>'; }
+  if(type==='policy'){ t.innerText='سياسة الخصوصية'; c.innerHTML='نحن نحترم خصوصيتكم ولا نشارك بياناتكم مع أي جهة ثالثة.<br><br>الدفع عند الاستلام فقط.<br><br>يمكنكم إرجاع المنتج خلال 3 أيام في حال وجود خلل مصنعي.'; }
+  m.style.display='flex';
+}
+</script>
 </body>
 </html>
