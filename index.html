@@ -5,27 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>السوق العصري</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#fff;font-family:Tahoma}
-.top{background:#c9a96e;color:#fff;text-align:center;padding:8px;font-size:11px}
-header{padding:12px;border-bottom:1px solid #eee;display:flex;gap:8px;align-items:center;position:sticky;top:0;background:#fff;z-index:20}
+body{margin:0;font-family:Tahoma;background:#fff}
+.top{background:#c9a96e;color:#fff;text-align:center;padding:8px;font-size:12px}
+header{padding:12px;display:flex;gap:8px;align-items:center;border-bottom:1px solid #eee}
 .logo{color:#c9a96e;font-weight:900;font-size:18px}
-#q{flex:1;padding:11px;border:1px solid #ddd;border-radius:22px}
-.btn-add{background:#111;color:#fff;border:0;padding:11px;border-radius:10px;font-weight:900}
-#admin{display:none;background:#fffbe6;padding:14px;margin:12px;border:2px dashed #c9a96e;border-radius:12px}
-#admin input,#admin select{width:100%;padding:12px;margin:5px 0;border:1px solid #ccc;border-radius:8px}
-.pick{background:#c9a96e;color:#fff;padding:12px;border-radius:8px;text-align:center;display:block;cursor:pointer;font-weight:900}
-#pv{display:none;width:100%;max-height:200px;border-radius:10px;margin-top:8px}
+#q{flex:1;padding:10px;border:1px solid #ddd;border-radius:20px}
 .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px}
-.cat{border:2px solid #e8dcc6;background:#faf7f2;border-radius:14px;padding:10px;text-align:center}
-.cat.active{background:#111;color:#c9a96e}
-.cat b{font-size:24px;display:block}.cat span{font-size:11px;font-weight:800;display:block;margin-top:4px}
+.cat{background:#faf7f2;border:2px solid #e8dcc6;border-radius:14px;padding:12px;text-align:center;cursor:pointer}
+.cat.active{background:#111;color:#c9a96e;border-color:#111}
+.cat b{font-size:24px;display:block}
+.cat span{font-size:11px;font-weight:800;display:block;margin-top:4px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:10px}
-.card{border:1px solid #eee;border-radius:12px;overflow:hidden}
-.ph{height:100px;background:#f6f3ef;display:grid;place-items:center;font-size:30px}
-.ph img{width:100%;height:100%;object-fit:cover}
-.info{padding:8px;font-size:11px}.info b{color:#c9a96e;display:block;margin:4px 0}
-.info button{width:100%;background:#111;color:#fff;border:0;padding:7px;border-radius:6px}
-#cart{position:fixed;bottom:12px;left:12px;right:12px;background:#111;color:#fff;padding:12px;border-radius:14px;display:flex;justify-content:space-between;z-index:99}
+.card{border:1px solid #eee;border-radius:12px;overflow:hidden;text-align:center;padding-bottom:8px}
+.ph{height:100px;background:#f6f3ef;display:grid;place-items:center;font-size:36px}
+.card b{color:#c9a96e;display:block;margin:4px}
+.card button{background:#111;color:#fff;border:0;padding:6px 12px;border-radius:6px;width:90%;margin-top:4px}
 </style>
 </head>
 <body>
@@ -33,30 +27,68 @@ header{padding:12px;border-bottom:1px solid #eee;display:flex;gap:8px;align-item
 <header>
 <div class="logo">السوق العصري</div>
 <input id="q" placeholder="ابحث..." oninput="render()">
-<button class="btn-add" onclick="openAdmin()">+ منتج</button>
 </header>
-
-<div id="admin">
-<select id="fc"><option>ساعات</option><option>مستلزمات أطفال</option><option>مواد غذائية</option><option>العناية بالبشرة</option><option>مستلزمات منزلية</option><option>إلكترونيات</option><option>أزياء</option><option>عطور</option><option>حقائب وأحذية</option><option>اكسسوارات موبايل</option></select>
-<input id="fn" placeholder="اسم المنتج"><input id="fp" type="number" placeholder="السعر">
-<label class="pick" for="fi">📸 اختر صورة المنتج</label><input id="fi" type="file" accept="image/*" style="display:none"><img id="pv">
-<button onclick="save()" style="width:100%;background:#c9a96e;color:#fff;border:0;padding:12px;border-radius:8px;font-weight:900;margin-top:8px">حفظ ✓</button>
-<button onclick="closeAdmin();clearAll()" style="width:100%;background:#ffdddd;color:#900;border:0;padding:8px;border-radius:8px;margin-top:6px">مسح كل المنتجات المضافة (اذا ضرب)</button>
-<button onclick="closeAdmin()" style="width:100%;background:#eee;border:0;padding:8px;border-radius:8px;margin-top:4px">اغلاق</button>
-</div>
-
 <div class="cats" id="cats"></div>
 <div class="grid" id="grid"></div>
-<div style="height:80px"></div>
-<div id="cart"><div>🛒 <span id="cnt">0</span> | <span id="tot">0</span> د.ع</div><button onclick="order()" style="background:#c9a96e;color:#fff;border:0;padding:6px 12px;border-radius:6px">واتساب</button></div>
 
 <script>
-let CATS=[
-{n:"الكل",i:"✨"},{n:"ساعات",i:"⌚"},{n:"مستلزمات أطفال",i:"👶"},{n:"مواد غذائية",i:"🥑"},{n:"العناية بالبشرة",i:"💧"},{n:"مستلزمات منزلية",i:"🏺"},{n:"إلكترونيات",i:"🎧"},{n:"أزياء",i:"👗"},{n:"عطور",i:"🌸"},{n:"حقائب وأحذية",i:"👜"},{n:"اكسسوارات موبايل",i:"📱"}
+const CATS=[
+{n:"الكل",i:"✨"},
+{n:"ساعات",i:"⌚"},
+{n:"مستلزمات أطفال",i:"👶"},
+{n:"مواد غذائية",i:"🥑"},
+{n:"العناية بالبشرة",i:"💧"},
+{n:"مستلزمات منزلية",i:"🏺"},
+{n:"إلكترونيات",i:"🎧"},
+{n:"أزياء",i:"👗"},
+{n:"عطور",i:"🌸"},
+{n:"حقائب وأحذية",i:"👜"},
+{n:"اكسسوارات موبايل",i:"📱"}
 ];
-let DEF=[
-{c:"ساعات",n:"ساعة فاخرة",p:450000},{c:"مستلزمات أطفال",n:"طقم كاشمير للأطفال",p:85000},{c:"مواد غذائية",n:"سلة غذاء عضوي",p:60000},{c:"العناية بالبشرة",n:"سيروم ذهبي",p:75000},{c:"مستلزمات منزلية",n:"مبخرة فاخرة",p:45000},{c:"إلكترونيات",n:"سماعات فاخرة",p:350000},{c:"أزياء",n:"ملابس عصرية",p:95000},{c:"عطور",n:"عطر فاخر",p:120000},{c:"حقائب وأحذية",n:"حقيبة فاخرة",p:180000},{c:"اكسسوارات موبايل",n:"اكسسوار موبايل",p:25000}
+const PRODUCTS=[
+{c:"ساعات",n:"ساعة فاخرة",p:450000,i:"⌚"},
+{c:"مستلزمات أطفال",n:"طقم كاشمير للأطفال",p:85000,i:"👶"},
+{c:"مواد غذائية",n:"سلة غذاء عضوي",p:60000,i:"🥑"},
+{c:"العناية بالبشرة",n:"سيروم ذهبي",p:75000,i:"💧"},
+{c:"مستلزمات منزلية",n:"مبخرة فاخرة",p:45000,i:"🏺"},
+{c:"إلكترونيات",n:"سماعات فاخرة",p:350000,i:"🎧"},
+{c:"أزياء",n:"ملابس عصرية",p:95000,i:"👗"},
+{c:"عطور",n:"عطر فاخر",p:120000,i:"🌸"},
+{c:"حقائب وأحذية",n:"حقيبة فاخرة",p:180000,i:"👜"},
+{c:"اكسسوارات موبايل",n:"اكسسوار موبايل",p:25000,i:"📱"}
 ];
-let custom=[],active="الكل",cart=[],sum=0,tmp="";
-try{custom=JSON.parse(localStorage.getItem('asri_final')||'[]')}catch(e){custom=[];localStorage.removeItem('asri_final')}
-function open
+let active="الكل";
+const catsEl=document.getElementById('cats');
+const gridEl=document.getElementById('grid');
+CATS.forEach(o=>{
+let d=document.createElement('div');
+d.className='cat'+(o.n===active?' active':'');
+d.innerHTML=`<b>${o.i}</b><span>${o.n}</span>`;
+d.onclick=()=>{
+active=o.n;
+document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
+d.classList.add('active');
+render();
+};
+catsEl.appendChild(d);
+});
+function render(){
+let q=document.getElementById('q').value||"";
+let list=PRODUCTS.filter(p=>{
+if(active!=="الكل" && p.c!==active) return false;
+if(q && !p.n.includes(q)) return false;
+return true;
+});
+gridEl.innerHTML=list.map(p=>`
+<div class="card">
+<div class="ph">${p.i}</div>
+<div>${p.n}</div>
+<b>${p.p.toLocaleString()} د.ع</b>
+<button>أضف للسلة</button>
+</div>
+`).join('');
+}
+render();
+</script>
+</body>
+</html>
