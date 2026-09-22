@@ -8,9 +8,10 @@
 *{box-sizing:border-box}body{margin:0;font-family:Tahoma;background:#fff}
 .top{background:#111;color:#c9a96e;text-align:center;padding:10px;font-weight:900}
 header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;position:sticky;top:0;z-index:10;border-bottom:2px solid #c9a96e}
-.logo{color:#c9a96e;font-weight:900;font-size:20px}
+.logo{color:#c9a96e;font-weight:900;font-size:20px;cursor:pointer;user-select:none}
 #q{flex:1;padding:12px;border:2px solid #e8dcc6;border-radius:22px}
-.btn{background:#c9a96e;color:#fff;border:0;padding:12px 14px;border-radius:10px;font-weight:900;cursor:pointer}
+.btn{background:#c9a96e;color:#fff;border:0;padding:12px 14px;border-radius:10px;font-weight:900;cursor:pointer;display:none} /* مخفي للزوار */
+.btn.show{display:block}
 #admin{display:none;background:#fffbe6;padding:14px;margin:12px;border:2px solid #c9a96e;border-radius:14px}
 #admin input,#admin select{width:100%;padding:12px;margin:5px 0;border:1px solid #ccc;border-radius:8px}
 .pick{background:#111;color:#c9a96e;padding:12px;border-radius:8px;text-align:center;display:block;font-weight:900;border:2px dashed #c9a96e;cursor:pointer}
@@ -32,9 +33,9 @@ header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;posi
 <body>
 <div class="top">السوق الحصري - AL-HASRY STORE</div>
 <header>
-<div class="logo">السوق الحصري</div>
+<div class="logo" id="logoBtn">السوق الحصري</div>
 <input id="q" placeholder="ابحث عن منتج..." oninput="render()">
-<button class="btn" onclick="askCode()">+ منتج</button>
+<button class="btn" id="addBtn" onclick="askCode()">+ منتج</button>
 </header>
 <div id="admin">
 <h3 style="margin:0 0 10px">اضافة منتج جديد</h3>
@@ -52,7 +53,6 @@ header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;posi
 <div style="height:90px"></div>
 <div id="cart">
 <div>🛒 <span id="cnt">0</span> منتج | <span id="tot">0</span> د.ع</div>
-<!-- تم التعديل 1: ايقونة واتساب الاصلية -->
 <button class="wa-btn" onclick="orderNow()" title="اطلب عبر واتساب"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:28px;height:28px"></button>
 </div>
 <script>
@@ -60,8 +60,9 @@ const SECRET="2223";
 const WA_NUMBER="9647822642223";
 let CATS=[
 {n:"الكل",img:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300"},
-{n:"ساعات",img:"https://images.unsplash.com/photo-1524805444973-bf35c9623286?w=300"},
-{n:"مستلزمات أطفال",img:"https://images.unsplash.com/photo-1522771930-78848d9293e?w=300"},
+// تم اصلاح الصورتين
+{n:"ساعات",img:"https://i.ibb.co/7t4Q3r0M/watch.jpg"},
+{n:"مستلزمات أطفال",img:"https://i.ibb.co/4Z0f6W2/baby.jpg"},
 {n:"مواد غذائية",img:"https://images.unsplash.com/photo-1542838132-92c53300491e?w=300"},
 {n:"العناية بالبشرة",img:"https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300"},
 {n:"مستلزمات منزلية",img:"https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=300"},
@@ -88,16 +89,41 @@ let DEF=[
 ];
 let custom=[],active="الكل",cart=[],sum=0,tmpImg="";
 try{custom=JSON.parse(localStorage.getItem('hasry_final_v2')||'[]')}catch(e){localStorage.removeItem('hasry_final_v2');custom=[]}
-function askCode(){
+
+// اخفاء زر الاضافة - يظهر فقط لك
+let clickCount=0, clickTimer=null;
+const logoBtn=document.getElementById('logoBtn');
+const addBtn=document.getElementById('addBtn');
+
+logoBtn.addEventListener('click',()=>{
+clickCount++;
+clearTimeout(clickTimer);
+clickTimer=setTimeout(()=>{clickCount=0},2000);
+if(clickCount>=5){
+clickCount=0;
+askCode(true);
+}
+});
+
+// اذا الرابط بيه?admin=2223 يظهر الزر مباشرة لك
+if(window.location.search.includes('admin='+SECRET)){
+addBtn.classList.add('show');
+}
+
+function askCode(fromLogo=false){
 let c=prompt("ادخل رمز الامان:");
-if(c===SECRET){document.getElementById('admin').style.display='block';}
-else if(c!==null){alert("الرمز خطأ! الرمز هو 2223");}
+if(c===SECRET){
+addBtn.classList.add('show');
+document.getElementById('admin').style.display='block';
+}else if(c!==null){
+alert("الرمز خطأ! الرمز هو 2223");
+}
 }
 let catsEl=document.getElementById('cats');
 CATS.forEach(o=>{
 let d=document.createElement('div');d.className='cat'+(o.n===active?' active':'');
-// تم التعديل 2: اضافة بديل اذا الصورة ما حملت
-d.innerHTML=`<img src="${o.img}" onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(o.n)}'"><span>${o.n}</span>`;
+let fallback=`https://via.placeholder.com/300x200/111111/c9a96e?text=${encodeURIComponent(o.n)}`;
+d.innerHTML=`<img src="${o.img}" onerror="this.onerror=null;this.src='${fallback}'"><span>${o.n}</span>`;
 d.onclick=()=>{
 active=o.n;
 document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
