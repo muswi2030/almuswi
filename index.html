@@ -1,206 +1,186 @@
 <!doctype html>
 <html dir="rtl" lang="ar">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>السوق الحصري</title>
-  <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Tahoma;background:#fff}
-   .top{background:#111;color:#c9a96e;text-align:center;padding:10px;font-weight:900}
-    header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;position:sticky;top:0;z-index:10;border-bottom:2px solid #c9a96e}
-   .logo{color:#c9a96e;font-weight:900;font-size:20px;cursor:pointer;user-select:none}
-    #q{flex:1;padding:12px;border:2px solid #e8dcc6;border-radius:22px}
-   .btn{background:#c9a96e;color:#fff;border:0;padding:12px 14px;border-radius:10px;font-weight:900;cursor:pointer;display:none}
-   .btn.show{display:block}
-    #admin{display:none;background:#fffbe6;padding:14px;margin:12px;border:2px solid #c9a96e;border-radius:14px}
-    #admin input,#admin select{width:100%;padding:12px;margin:5px 0;border:1px solid #ccc;border-radius:8px}
-   .pick{background:#111;color:#c9a96e;padding:12px;border-radius:8px;text-align:center;display:block;font-weight:900;border:2px dashed #c9a96e;cursor:pointer}
-    #pv{display:none;width:100%;height:180px;border-radius:12px;margin-top:8px;object-fit:cover}
-   .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px}
-   .cat{background:#fff;border:2px solid #e8dcc6;border-radius:16px;overflow:hidden;text-align:center;cursor:pointer}
-   .cat.active{border-color:#111;outline:2px solid #111}
-   .cat img{width:100%;height:75px;object-fit:cover;display:block}
-   .cat span{font-size:11px;font-weight:900;display:block;padding:7px;background:#faf7f2}
-   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:10px}
-   .card{background:#fff;border:1px solid #eee;border-radius:16px;overflow:hidden;text-align:center}
-   .ph{height:135px;background:#f6f3ef;overflow:hidden}
-   .ph img{width:100%;height:100%;object-fit:cover;display:block}
-   .info{padding:8px}
-   .info h4{margin:4px 0;font-size:12px;height:32px;overflow:hidden}
-   .info b{color:#c9a96e;display:block}
-   .info button{width:92%;background:#111;color:#fff;border:0;padding:8px;border-radius:8px;margin-top:4px;font-weight:900;cursor:pointer}
-    #cart{position:fixed;bottom:12px;left:12px;right:12px;background:#111;color:#fff;padding:12px 16px;border-radius:50px;display:flex;justify-content:space-between;align-items:center;z-index:99;box-shadow:0 4px 15px rgba(0,0,0,.3)}
-   .wa-btn{background:#fff;border:0;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>السوق الحصري</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma;background:#fff}
+.top{background:#111;color:#c9a96e;text-align:center;padding:10px;font-weight:900}
+header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;position:sticky;top:0;z-index:10;border-bottom:2px solid #c9a96e}
+.logo{color:#c9a96e;font-weight:900;font-size:20px;cursor:pointer;user-select:none}
+#q{flex:1;padding:12px;border:2px solid #e8dcc6;border-radius:22px}
+.btn{background:#c9a96e;color:#fff;border:0;padding:12px 14px;border-radius:10px;font-weight:900;cursor:pointer;display:none}
+.btn.show{display:block}
+#admin{display:none;background:#fffbe6;padding:14px;margin:12px;border:2px solid #c9a96e;border-radius:14px}
+#admin input,#admin select{width:100%;padding:12px;margin:5px 0;border:1px solid #ccc;border-radius:8px}
+.pick{background:#111;color:#c9a96e;padding:12px;border-radius:8px;text-align:center;display:block;font-weight:900;border:2px dashed #c9a96e;cursor:pointer}
+#pv{display:none;width:100%;height:180px;border-radius:12px;margin-top:8px;object-fit:cover}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px}
+.cat{background:#fff;border:2px solid #e8dcc6;border-radius:16px;overflow:hidden;text-align:center;cursor:pointer}
+.cat.active{border-color:#111;outline:2px solid #111}
+.cat img{width:100%;height:75px;object-fit:cover;display:block}
+.cat span{font-size:11px;font-weight:900;display:block;padding:7px;background:#faf7f2}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:10px}
+.card{background:#fff;border:1px solid #eee;border-radius:16px;overflow:hidden;text-align:center}
+.ph{height:135px;background:#f6f3ef;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.info{padding:8px}
+.info h4{margin:4px 0;font-size:12px;height:32px;overflow:hidden}
+.info b{color:#c9a96e;display:block}
+.info button{width:92%;background:#111;color:#fff;border:0;padding:8px;border-radius:8px;margin-top:4px;font-weight:900;cursor:pointer}
+#cart{position:fixed;bottom:12px;left:12px;right:12px;background:#111;color:#fff;padding:12px 16px;border-radius:50px;display:flex;justify-content:space-between;align-items:center;z-index:99;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.wa-btn{background:#fff;border:0;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
+</style>
 </head>
 <body>
-  <div class="top">السوق الحصري - AL-HASRY STORE</div>
-  <header>
-    <div class="logo" id="logoBtn">السوق الحصري</div>
-    <input id="q" placeholder="ابحث عن منتج..." oninput="render()">
-    <button class="btn" id="addBtn" onclick="askCode()">+ منتج</button>
-  </header>
-
-  <div id="admin">
-    <h3 style="margin:0 0 10px">اضافة منتج جديد</h3>
-    <select id="fc">
-      <option>ساعات</option>
-      <option>مستلزمات أطفال</option>
-      <option>مواد غذائية</option>
-      <option>العناية بالبشرة</option>
-      <option>مستلزمات منزلية</option>
-      <option>إلكترونيات</option>
-      <option>أزياء</option>
-      <option>عطور</option>
-      <option>حقائب وأحذية</option>
-      <option>اكسسوارات موبايل</option>
-    </select>
-    <input id="fn" placeholder="اسم المنتج بالعربي">
-    <input id="fp" type="number" placeholder="السعر بالدينار">
-    <label class="pick" for="fi">📸 اضغط لاختيار صورة المنتج</label>
-    <input id="fi" type="file" accept="image/*" style="display:none">
-    <img id="pv">
-    <button onclick="saveProduct()" style="width:100%;background:#c9a96e;color:#fff;border:0;padding:13px;border-radius:8px;font-weight:900;margin-top:10px;cursor:pointer">نشر المنتج ✓</button>
-    <button onclick="document.getElementById('admin').style.display='none'" style="width:100%;background:#eee;border:0;padding:9px;border-radius:8px;margin-top:6px;cursor:pointer">اغلاق</button>
-  </div>
-
-  <div class="cats" id="cats"></div>
-  <div class="grid" id="grid"></div>
-  <div style="height:90px"></div>
-
-  <div id="cart">
-    <div>🛒 <span id="cnt">0</span> منتج | <span id="tot">0</span> د.ع</div>
-    <button class="wa-btn" onclick="orderNow()" title="اطلب عبر واتساب">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:28px;height:28px">
-    </button>
-  </div>
-
+<div class="top">السوق الحصري - AL-HASRY STORE</div>
+<header>
+<div class="logo" id="logoBtn">السوق الحصري</div>
+<input id="q" placeholder="ابحث عن منتج..." oninput="render()">
+<button class="btn" id="addBtn" onclick="askCode()">+ منتج</button>
+</header>
+<div id="admin">
+<h3 style="margin:0 0 10px">اضافة منتج جديد</h3>
+<select id="fc">
+<option>ساعات</option>
+<option>مستلزمات أطفال</option>
+<option>مواد غذائية</option>
+<option>العناية بالبشرة</option>
+<option>مستلزمات منزلية</option>
+<option>إلكترونيات</option>
+<option>أزياء</option>
+<option>عطور</option>
+<option>حقائب وأحذية</option>
+<option>اكسسوارات موبايل</option>
+</select>
+<input id="fn" placeholder="اسم المنتج بالعربي">
+<input id="fp" type="number" placeholder="السعر بالدينار">
+<label class="pick" for="fi">📸 اضغط لاختيار صورة المنتج</label>
+<input id="fi" type="file" accept="image/*" style="display:none">
+<img id="pv">
+<button onclick="saveProduct()" style="width:100%;background:#c9a96e;color:#fff;border:0;padding:13px;border-radius:8px;font-weight:900;margin-top:10px;cursor:pointer">نشر المنتج ✓</button>
+<button onclick="document.getElementById('admin').style.display='none'" style="width:100%;background:#eee;border:0;padding:9px;border-radius:8px;margin-top:6px;cursor:pointer">اغلاق</button>
+</div>
+<div class="cats" id="cats"></div>
+<div class="grid" id="grid"></div>
+<div style="height:90px"></div>
+<div id="cart">
+<div>🛒 <span id="cnt">0</span> منتج | <span id="tot">0</span> د.ع</div>
+<button class="wa-btn" onclick="orderNow()" title="اطلب عبر واتساب">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:28px;height:28px">
+</button>
+</div>
 <script>
 const SECRET="2223";
 const WA_NUMBER="9647822642223";
-
 let CATS=[
-  {n:"الكل",img:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300"},
-  // تم الاصلاح - صور مضمنة داخل الكود (مستحيل تنحذف)
-  {n:"ساعات",img:"data:image/svg+xml;utf8,[STRIPPED]"},
-  {n:"مستلزمات أطفال",img:"data:image/svg+xml;utf8,[STRIPPED]"},
-  {n:"مواد غذائية",img:"https://images.unsplash.com/photo-1542838132-92c53300491e?w=300"},
-  {n:"العناية بالبشرة",img:"https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300"},
-  {n:"مستلزمات منزلية",img:"https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=300"},
-  {n:"إلكترونيات",img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300"},
-  {n:"أزياء",img:"https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=300"},
-  {n:"عطور",img:"https://images.unsplash.com/photo-1541643600914-78b084683601?w=300"},
-  {n:"حقائب وأحذية",img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300"},
-  {n:"اكسسوارات موبايل",img:"https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=300"}
+{n:"الكل",img:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300"},
+{n:"ساعات",img:"https://images.unsplash.com/photo-1524805444973-bf35c9623286?w=300"},
+{n:"مستلزمات أطفال",img:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=300"},
+{n:"مواد غذائية",img:"https://images.unsplash.com/photo-1542838132-92c53300491e?w=300"},
+{n:"العناية بالبشرة",img:"https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300"},
+{n:"مستلزمات منزلية",img:"https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=300"},
+{n:"إلكترونيات",img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300"},
+{n:"أزياء",img:"https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=300"},
+{n:"عطور",img:"https://images.unsplash.com/photo-1541643600914-78b084683601?w=300"},
+{n:"حقائب وأحذية",img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300"},
+{n:"اكسسوارات موبايل",img:"https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=300"}
 ];
-
 let DEF=[
-  {c:"ساعات",n:"ساعة رجالية فاخرة",p:450000,img:"https://images.unsplash.com/photo-1524805444973-bf35c9623286?w=400"},
-  {c:"ساعات",n:"ساعة نسائية ذهبية",p:380000,img:"https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=400"},
-  {c:"مستلزمات أطفال",n:"طقم كاشمير للأطفال",p:85000,img:"https://images.unsplash.com/photo-1522771930-78848d9293e?w=400"},
-  {c:"مستلزمات أطفال",n:"حذاء أطفال رياضي",p:45000,img:"https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=400"},
-  {c:"مستلزمات أطفال",n:"لعبة تعليمية",p:30000,img:"https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400"},
-  {c:"مواد غذائية",n:"سلة غذاء عضوي",p:60000,img:"https://images.unsplash.com/photo-1542838132-92c53300491e?w=400"},
-  {c:"العناية بالبشرة",n:"سيروم ذهبي",p:75000,img:"https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400"},
-  {c:"مستلزمات منزلية",n:"مبخرة فاخرة",p:45000,img:"https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400"},
-  {c:"إلكترونيات",n:"سماعات بلوتوث",p:350000,img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"},
-  {c:"أزياء",n:"ملابس عصرية",p:95000,img:"https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=400"},
-  {c:"عطور",n:"عطر فرنسي فاخر",p:120000,img:"https://images.unsplash.com/photo-1541643600914-78b084683601?w=400"},
-  {c:"حقائب وأحذية",n:"حقيبة يد فاخرة",p:180000,img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400"},
-  {c:"اكسسوارات موبايل",n:"حامل موبايل",p:25000,img:"https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=400"}
+{c:"ساعات",n:"ساعة رجالية فاخرة",p:450000,img:"https://images.unsplash.com/photo-1524805444973-bf35c9623286?w=400"},
+{c:"ساعات",n:"ساعة نسائية ذهبية",p:380000,img:"https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=400"},
+{c:"مستلزمات أطفال",n:"طقم كاشمير للأطفال",p:85000,img:"https://images.unsplash.com/photo-1522771930-78848d9293e?w=400"},
+{c:"مستلزمات أطفال",n:"حذاء أطفال رياضي",p:45000,img:"https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=400"},
+{c:"مستلزمات أطفال",n:"لعبة تعليمية",p:30000,img:"https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400"},
+{c:"مواد غذائية",n:"سلة غذاء عضوي",p:60000,img:"https://images.unsplash.com/photo-1542838132-92c53300491e?w=400"},
+{c:"العناية بالبشرة",n:"سيروم ذهبي",p:75000,img:"https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400"},
+{c:"مستلزمات منزلية",n:"مبخرة فاخرة",p:45000,img:"https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400"},
+{c:"إلكترونيات",n:"سماعات بلوتوث",p:350000,img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"},
+{c:"أزياء",n:"ملابس عصرية",p:95000,img:"https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=400"},
+{c:"عطور",n:"عطر فرنسي فاخر",p:120000,img:"https://images.unsplash.com/photo-1541643600914-78b084683601?w=400"},
+{c:"حقائب وأحذية",n:"حقيبة يد فاخرة",p:180000,img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400"},
+{c:"اكسسوارات موبايل",n:"حامل موبايل",p:25000,img:"https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=400"}
 ];
-
 let custom=[],active="الكل",cart=[],sum=0,tmpImg="";
 try{custom=JSON.parse(localStorage.getItem('hasry_final_v2')||'[]')}catch(e){localStorage.removeItem('hasry_final_v2');custom=[]}
-
 let clickCount=0, clickTimer=null;
 const logoBtn=document.getElementById('logoBtn');
 const addBtn=document.getElementById('addBtn');
-
 logoBtn.addEventListener('click',()=>{
-  clickCount++;
-  clearTimeout(clickTimer);
-  clickTimer=setTimeout(()=>{clickCount=0},2000);
-  if(clickCount>=5){
-    clickCount=0;
-    askCode(true);
-  }
+clickCount++;
+clearTimeout(clickTimer);
+clickTimer=setTimeout(()=>{clickCount=0},2000);
+if(clickCount>=5){
+clickCount=0;
+askCode(true);
+}
 });
-
 if(window.location.search.includes('admin='+SECRET)){
-  addBtn.classList.add('show');
+addBtn.classList.add('show');
 }
-
-function askCode(){
-  let c=prompt("ادخل رمز الامان:");
-  if(c===SECRET){
-    addBtn.classList.add('show');
-    document.getElementById('admin').style.display='block';
-  }else if(c!==null){
-    alert("الرمز خطأ! الرمز هو 2223");
-  }
+function askCode(fromLogo=false){
+let c=prompt("ادخل رمز الامان:");
+if(c===SECRET){
+addBtn.classList.add('show');
+document.getElementById('admin').style.display='block';
+}else if(c!==null){
+alert("الرمز خطأ! الرمز هو 2223");
 }
-
+}
 let catsEl=document.getElementById('cats');
 CATS.forEach(o=>{
-  let d=document.createElement('div');
-  d.className='cat'+(o.n===active?' active':'');
-  let fallback=`https://via.placeholder.com/300x200/111111/c9a96e?text=${encodeURIComponent(o.n)}`;
-  d.innerHTML=`<img src="${o.img}" onerror="this.onerror=null;this.src='${fallback}'"><span>${o.n}</span>`;
-  d.onclick=()=>{
-    active=o.n;
-    document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
-    d.classList.add('active');
-    render();
-  };
-  catsEl.appendChild(d);
+let d=document.createElement('div');
+d.className='cat'+(o.n===active?' active':'');
+let fallback=`https://via.placeholder.com/300x200/111111/c9a96e?text=${encodeURIComponent(o.n)}`;
+d.innerHTML=`<img src="${o.img}" onerror="this.onerror=null;this.src='${fallback}'"><span>${o.n}</span>`;
+d.onclick=()=>{
+active=o.n;
+document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
+d.classList.add('active');
+render();
+};
+catsEl.appendChild(d);
 });
-
 document.getElementById('fi').addEventListener('change',e=>{
-  let r=new FileReader();
-  r.onload=ev=>{
-    tmpImg=ev.target.result;
-    let im=document.getElementById('pv');
-    im.src=tmpImg;
-    im.style.display='block';
-  };
-  if(e.target.files[0]) r.readAsDataURL(e.target.files[0]);
+let r=new FileReader();
+r.onload=ev=>{
+tmpImg=ev.target.result;
+let im=document.getElementById('pv');
+im.src=tmpImg;
+im.style.display='block';
+};
+if(e.target.files[0]) r.readAsDataURL(e.target.files[0]);
 });
-
 function getAll(){return [...DEF,...custom];}
-
 function render(){
-  let list=getAll();
-  if(active!=="الكل") list=list.filter(x=>x.c===active);
-  let q=document.getElementById('q').value.trim();
-  if(q) list=list.filter(x=>x.n.includes(q));
-  document.getElementById('grid').innerHTML=list.map(p=>`
-    <div class="card">
-      <div class="ph"><img src="${p.img}" onerror="this.src='https://via.placeholder.com/400?text=صورة'"></div>
-      <div class="info"><h4>${p.n}</h4><b>${p.p.toLocaleString()} د.ع</b><button onclick="addToCart(${p.p},'${p.n.replace(/'/g,'')}')">أضف للسلة</button></div>
-    </div>`).join('');
+let list=getAll();
+if(active!=="الكل") list=list.filter(x=>x.c===active);
+let q=document.getElementById('q').value.trim();
+if(q) list=list.filter(x=>x.n.includes(q));
+document.getElementById('grid').innerHTML=list.map(p=>`
+<div class="card">
+<div class="ph"><img src="${p.img}" onerror="this.src='https://via.placeholder.com/400?text=صورة'"></div>
+<div class="info"><h4>${p.n}</h4><b>${p.p.toLocaleString()} د.ع</b><button onclick="addToCart(${p.p},'${p.n.replace(/'/g,'')}')">أضف للسلة</button></div>
+</div>`).join('');
 }
-
 function saveProduct(){
-  let c=document.getElementById('fc').value,n=document.getElementById('fn').value.trim(),p=parseInt(document.getElementById('fp').value);
-  if(!n||!p) return alert('اكتب اسم المنتج والسعر');
-  if(!tmpImg) return alert('اختار صورة المنتج 📸');
-  custom.push({c,n,p,img:tmpImg});
-  localStorage.setItem('hasry_final_v2',JSON.stringify(custom));
-  render();alert('تم نشر المنتج ✓');document.getElementById('admin').style.display='none';document.getElementById('fn').value='';document.getElementById('fp').value='';tmpImg='';document.getElementById('pv').style.display='none';
+let c=document.getElementById('fc').value,n=document.getElementById('fn').value.trim(),p=parseInt(document.getElementById('fp').value);
+if(!n||!p) return alert('اكتب اسم المنتج والسعر');
+if(!tmpImg) return alert('اختار صورة المنتج 📸');
+custom.push({c,n,p,img:tmpImg});
+localStorage.setItem('hasry_final_v2',JSON.stringify(custom));
+render();alert('تم نشر المنتج ✓');document.getElementById('admin').style.display='none';document.getElementById('fn').value='';document.getElementById('fp').value='';tmpImg='';document.getElementById('pv').style.display='none';
 }
-
 function addToCart(p,n){cart.push({n,p});sum+=p;document.getElementById('cnt').innerText=cart.length;document.getElementById('tot').innerText=sum.toLocaleString();}
-
 function orderNow(){
-  if(!cart.length) return alert('السلة فارغة');
-  let t=cart.map(x=>x.n+' - '+x.p+' د.ع').join('%0A');
-  let msg=`طلب جديد من السوق الحصري:%0A%0A${t}%0A%0Aالمجموع: ${sum.toLocaleString()} د.ع`;
-  window.open('https://wa.me/'+WA_NUMBER+'?text='+msg,'_blank');
+if(!cart.length) return alert('السلة فارغة');
+let t=cart.map(x=>x.n+' - '+x.p+' د.ع').join('%0A');
+let msg=`طلب جديد من السوق الحصري:%0A%0A${t}%0A%0Aالمجموع: ${sum.toLocaleString()} د.ع`;
+window.open('https://wa.me/'+WA_NUMBER+'?text='+msg,'_blank');
 }
-
 render();
 </script>
 </body>
-  </html>
+</html>
