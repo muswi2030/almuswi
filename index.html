@@ -26,7 +26,7 @@ header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;posi
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .info{padding:8px}.info h4{margin:4px 0;font-size:12px;height:32px;overflow:hidden}.info b{color:#c9a96e;display:block}.info button{width:92%;background:#111;color:#fff;border:0;padding:8px;border-radius:8px;margin-top:4px;font-weight:900;cursor:pointer}
 #cart{position:fixed;bottom:12px;left:12px;right:12px;background:#111;color:#fff;padding:12px 16px;border-radius:50px;display:flex;justify-content:space-between;align-items:center;z-index:99;box-shadow:0 4px 15px rgba(0,0,0,.3)}
-.wa-btn{background:#25D366;border:0;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:24px;cursor:pointer}
+.wa-btn{background:#fff;border:0;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
 </style>
 </head>
 <body>
@@ -36,7 +36,6 @@ header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;posi
 <input id="q" placeholder="ابحث عن منتج..." oninput="render()">
 <button class="btn" onclick="askCode()">+ منتج</button>
 </header>
-
 <div id="admin">
 <h3 style="margin:0 0 10px">اضافة منتج جديد</h3>
 <select id="fc"><option>ساعات</option><option>مستلزمات أطفال</option><option>مواد غذائية</option><option>العناية بالبشرة</option><option>مستلزمات منزلية</option><option>إلكترونيات</option><option>أزياء</option><option>عطور</option><option>حقائب وأحذية</option><option>اكسسوارات موبايل</option></select>
@@ -48,16 +47,14 @@ header{padding:12px;display:flex;gap:8px;align-items:center;background:#fff;posi
 <button onclick="saveProduct()" style="width:100%;background:#c9a96e;color:#fff;border:0;padding:13px;border-radius:8px;font-weight:900;margin-top:10px;cursor:pointer">نشر المنتج ✓</button>
 <button onclick="document.getElementById('admin').style.display='none'" style="width:100%;background:#eee;border:0;padding:9px;border-radius:8px;margin-top:6px;cursor:pointer">اغلاق</button>
 </div>
-
 <div class="cats" id="cats"></div>
 <div class="grid" id="grid"></div>
 <div style="height:90px"></div>
-
 <div id="cart">
 <div>🛒 <span id="cnt">0</span> منتج | <span id="tot">0</span> د.ع</div>
-<button class="wa-btn" onclick="orderNow()" title="اطلب عبر واتساب">💬</button>
+<!-- تم التعديل 1: ايقونة واتساب الاصلية -->
+<button class="wa-btn" onclick="orderNow()" title="اطلب عبر واتساب"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:28px;height:28px"></button>
 </div>
-
 <script>
 const SECRET="2223";
 const WA_NUMBER="9647822642223";
@@ -91,17 +88,16 @@ let DEF=[
 ];
 let custom=[],active="الكل",cart=[],sum=0,tmpImg="";
 try{custom=JSON.parse(localStorage.getItem('hasry_final_v2')||'[]')}catch(e){localStorage.removeItem('hasry_final_v2');custom=[]}
-
 function askCode(){
 let c=prompt("ادخل رمز الامان:");
 if(c===SECRET){document.getElementById('admin').style.display='block';}
 else if(c!==null){alert("الرمز خطأ! الرمز هو 2223");}
 }
-
 let catsEl=document.getElementById('cats');
 CATS.forEach(o=>{
 let d=document.createElement('div');d.className='cat'+(o.n===active?' active':'');
-d.innerHTML=`<img src="${o.img}"><span>${o.n}</span>`;
+// تم التعديل 2: اضافة بديل اذا الصورة ما حملت
+d.innerHTML=`<img src="${o.img}" onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(o.n)}'"><span>${o.n}</span>`;
 d.onclick=()=>{
 active=o.n;
 document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
@@ -110,13 +106,11 @@ render();
 };
 catsEl.appendChild(d);
 });
-
 document.getElementById('fi').addEventListener('change',e=>{
 let r=new FileReader();
 r.onload=ev=>{tmpImg=ev.target.result;let im=document.getElementById('pv');im.src=tmpImg;im.style.display='block';};
 if(e.target.files[0]) r.readAsDataURL(e.target.files[0]);
 });
-
 function getAll(){return [...DEF,...custom];}
 function render(){
 let list=getAll();
@@ -125,7 +119,7 @@ let q=document.getElementById('q').value.trim();
 if(q) list=list.filter(x=>x.n.includes(q));
 document.getElementById('grid').innerHTML=list.map(p=>`
 <div class="card">
-<div class="ph"><img src="${p.img}"></div>
+<div class="ph"><img src="${p.img}" onerror="this.src='https://via.placeholder.com/400?text=صورة'"></div>
 <div class="info"><h4>${p.n}</h4><b>${p.p.toLocaleString()} د.ع</b><button onclick="addToCart(${p.p},'${p.n.replace(/'/g,'')}')">أضف للسلة</button></div>
 </div>`).join('');
 }
@@ -147,4 +141,4 @@ window.open('https://wa.me/'+WA_NUMBER+'?text='+msg,'_blank');
 render();
 </script>
 </body>
-</html>
+  </html>
