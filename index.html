@@ -3,96 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LUMIÈRE - السوق الحصري</title>
+<title>السوق العصري</title>
 <style>
-body{margin:0;background:#fff;font-family:Tahoma}
-.top{background:#c9a96e;color:#fff;text-align:center;padding:6px;font-size:11px}
-header{display:flex;align-items:center;padding:14px;gap:12px;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:10}
-.logo{color:#c9a96e;font-weight:900;letter-spacing:4px;font-size:22px;cursor:pointer}
-#q{flex:1;padding:10px;border:1px solid #ddd;border-radius:20px}
-.hbtn{display:none;background:#111;color:#fff;border:0;padding:10px 16px;border-radius:8px;font-weight:900}
-.hero{background:#f6f3ef;text-align:center;padding:26px}
-.hero h1{margin:0;font-size:18px}
-.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding:16px;max-width:1100px;margin:auto}
-@media(max-width:700px){.cats{grid-template-columns:repeat(3,1fr)}}
-.cat{text-align:center;cursor:pointer}
-.circle{width:90px;height:90px;border-radius:50%;border:2px solid #c9a96e;margin:0 auto 6px;overflow:hidden;background:#faf7f2}
-.circle img{width:100%;height:100%;object-fit:cover}
-.cat.active .circle{border-color:#111;transform:scale(1.05)}
-.cat h3{font-size:9px;margin:0}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;max-width:1100px;margin:auto}
-@media(min-width:800px){.grid{grid-template-columns:repeat(4,1fr)}}
-.card{border:1px solid #eee;border-radius:12px;overflow:hidden}
-.card img{width:100%;height:150px;object-fit:cover}
-.info{padding:10px}
-#admin{display:none;background:#f9f6f1;padding:14px;margin:16px;border:1px dashed #c9a96e;border-radius:12px}
-#admin input,#admin select,#admin textarea{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:8px}
-#cart{position:fixed;bottom:10px;left:10px;right:10px;background:#111;color:#fff;padding:12px;border-radius:12px;display:flex;justify-content:space-between;max-width:500px;margin:auto}
+*{box-sizing:border-box}body{margin:0;background:#fff;font-family:Tahoma;color:#111}
+.top{background:#c9a96e;color:#fff;text-align:center;padding:8px;font-size:11px}
+header{padding:12px;border-bottom:1px solid #eee;display:flex;gap:8px;align-items:center;position:sticky;top:0;background:#fff;z-index:20}
+.logo{color:#c9a96e;font-weight:900;font-size:20px}
+#q{flex:1;padding:11px 14px;border:1px solid #ddd;border-radius:22px;outline:0}
+.btn-add{background:#111;color:#fff;border:0;padding:11px 16px;border-radius:10px;font-weight:900;font-size:13px;cursor:pointer}
+#admin{display:none;background:#fffbe6;padding:16px;margin:12px;border:2px dashed #c9a96e;border-radius:14px;max-width:600px;margin:12px auto}
+#admin input,#admin select,#admin textarea{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:10px;font-size:13px}
+.pick{ background:#c9a96e;color:#fff;padding:13px;border-radius:10px;text-align:center;display:block;cursor:pointer;font-weight:900;margin:8px 0}
+#pv{display:none;width:100%;max-height:220px;border-radius:12px;object-fit:cover;margin-top:8px}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px;max-width:900px;margin:auto}
+.cat{border:2px solid #e8dcc6;background:#faf7f2;border-radius:16px;padding:12px 4px;text-align:center;cursor:pointer}
+.cat.active{background:#111;color:#c9a96e;border-color:#111;transform:scale(1.05)}
+.cat b{font-size:26px;display:block}.cat span{font-size:11px;font-weight:800;display:block;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:900px;margin:auto}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.cats{grid-template-columns:repeat(5,1fr)}}
+.card{border:1px solid #eee;border-radius:14px;overflow:hidden;background:#fff}
+.ph{height:110px;background:#f6f3ef;display:grid;place-items:center;font-size:32px;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover}
+.info{padding:9px}.info h4{font-size:11px;margin:0;min-height:28px;line-height:1.3}
+.info b{color:#c9a96e;display:block;margin:5px 0;font-size:13px}
+.info button{width:100%;background:#111;color:#fff;border:0;padding:8px;border-radius:8px;font-weight:900;cursor:pointer}
+#cart{position:fixed;bottom:12px;left:12px;right:12px;background:#111;color:#fff;padding:12px 16px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;max-width:500px;margin:0 auto;z-index:99}
 </style>
 </head>
 <body>
-<div class="top">COMPLIMENTARY SHIPPING OVER $500 • RETURNS WITHIN 30 DAYS</div>
-<header><div class="logo" id="L">LUMIÈRE</div><input id="q" placeholder="Search luxury..." oninput="render()"><button id="addBtn" class="hbtn" onclick="A.style.display=A.style.display=='none'?'block':'none'">+ منتج</button></header>
-<div class="hero"><h1>CURATED LUXURY FOR THE MODERN LIFESTYLE</h1><p style="color:#666;font-size:12px">Discover timeless pieces</p></div>
-<div id="A">
+<div class="top">السوق العصري • توصيل مجاني فوق 500 ألف • دفع عند الاستلام</div>
+<header>
+<div class="logo">السوق العصري</div>
+<input id="q" placeholder="ابحث في السوق العصري..." oninput="render()">
+<button class="btn-add" onclick="openAdmin()">+ منتج</button>
+</header>
+
 <div id="admin">
-<select id="fc"><option>ساعات</option><option>مستلزمات أطفال</option><option>مواد غذائية</option><option>العناية بالبشرة</option><option>مستلزمات منزلية</option><option>إلكترونيات</option><option>أزياء</option><option>عطور</option><option>حقائب وأحذية</option><option>اكسسوارات موبايل</option></select>
-<input id="fn" placeholder="اسم المنتج"><input id="fp" type="number" placeholder="السعر"><textarea id="fd" placeholder="وصف"></textarea>
-<input id="fi" type="file" accept="image/*"><img id="pv" style="width:100%;display:none;border-radius:10px;max-height:160px;object-fit:cover;margin-top:6px">
-<button onclick="save()" style="width:100%;background:#c9a96e;color:#fff;border:0;padding:11px;border-radius:8px;font-weight:900;margin-top:6px">حفظ ✓</button>
+<h3 style="margin:0 0 10px;color:#c9a96e">إضافة منتج جديد - السوق العصري</h3>
+<select id="fc">
+<option>ساعات</option>
+<option>مستلزمات أطفال</option>
+<option>مواد غذائية</option>
+<option>العناية بالبشرة</option>
+<option>مستلزمات منزلية</option>
+<option>إلكترونيات</option>
+<option>أزياء</option>
+<option>عطور</option>
+<option>حقائب وأحذية</option>
+<option>اكسسوارات موبايل</option>
+</select>
+<input id="fn" placeholder="اسم المنتج">
+<input id="fp" type="number" placeholder="السعر بالدينار العراقي">
+<textarea id="fd" placeholder="وصف المنتج (اختياري)"></textarea>
+<label class="pick" for="fi">📸 اضغط هنا لاختيار صورة المنتج</label>
+<input id="fi" type="file" accept="image/*" style="display:none">
+<img id="pv">
+<button onclick="save()" style="width:100%;background:#c9a96e;color:#fff;border:0;padding:13px;border-radius:10px;font-weight:900;margin-top:10px;cursor:pointer">حفظ المنتج ✓</button>
+<button onclick="closeAdmin()" style="width:100%;background:#eee;color:#333;border:0;padding:10px;border-radius:10px;margin-top:6px;cursor:pointer">إغلاق</button>
 </div>
-</div>
+
 <div class="cats" id="cats"></div>
 <div class="grid" id="grid"></div>
-<div id="cart"><div>🛒 <span id="cnt">0</span> | <span id="tot">0</span> د.ع</div><button onclick="order()" style="background:#c9a96e;color:#fff;border:0;padding:8px 14px;border-radius:8px;font-weight:900">واتساب</button></div>
+<div style="height:90px"></div>
+<div id="cart"><div>🛒 <span id="cnt">0</span> منتج | <span id="tot">0</span> د.ع</div><button onclick="order()" style="background:#c9a96e;color:#fff;border:0;padding:8px 16px;border-radius:8px;font-weight:900;cursor:pointer">طلب واتساب</button></div>
+
 <script>
-const icons=[
-"https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=300",
-"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=300",
-"https://images.unsplash.com/photo-1542838132-92c53300491e?w=300",
-"https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300",
-"https://images.unsplash.com/photo-1578500494198-246082612cc7?w=300",
-"https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=300",
-"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300",
-"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300",
-"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300",
-"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300"
+const CATS=[
+{n:"الكل",i:"✨"},
+{n:"ساعات",i:"⌚"},
+{n:"مستلزمات أطفال",i:"👶"},
+{n:"مواد غذائية",i:"🥑"},
+{n:"العناية بالبشرة",i:"💧"},
+{n:"مستلزمات منزلية",i:"🏺"},
+{n:"إلكترونيات",i:"🎧"},
+{n:"أزياء",i:"👗"},
+{n:"عطور",i:"🌸"},
+{n:"حقائب وأحذية",i:"👜"},
+{n:"اكسسوارات موبايل",i:"📱"}
 ];
-const CATS=["الكل","ساعات","مستلزمات أطفال","مواد غذائية","العناية بالبشرة","مستلزمات منزلية","إلكترونيات","أزياء","عطور","حقائب وأحذية","اكسسوارات موبايل"];
-const EN=["ALL","ROLEX WATCH","LUXURY BABY CASHMERE","GOURMET ORGANIC","LUXURY SERUM","MODERN HOME VASE","AIRPODS MAX","DESIGNER T-SHIRT","LUXURY NICHE PERFUME","BIRKIN BAG","IPHONE LUXURY"];
 const DEF=[
-{c:"ساعات",n:"ساعة Rolex",p:45000,d:"فاخرة"},{c:"مستلزمات أطفال",n:"طقم كاشمير",p:25000,d:"قطن"},
-{c:"مواد غذائية",n:"سلة اورغانيك",p:60000,d:"طبيعي"},{c:"العناية بالبشرة",n:"سيروم ذهبي",p:30000,d:"نضارة"},
-{c:"عطور",n:"Noir Oud",p:45000,d:"ثابت"},{c:"إلكترونيات",n:"AirPods Max",p:75000,d:"نقي"}
+{c:"ساعات",n:"ساعة فاخرة أصلية",p:450000},
+{c:"مستلزمات أطفال",n:"طقم كاشمير فاخر للأطفال",p:85000},
+{c:"مواد غذائية",n:"سلة غذاء عضوي فاخرة",p:60000},
+{c:"العناية بالبشرة",n:"سيروم ذهبي للبشرة",p:75000},
+{c:"مستلزمات منزلية",n:"مبخرة فاخرة للمنزل",p:45000},
+{c:"إلكترونيات",n:"سماعات بلوتوث فاخرة",p:350000},
+{c:"أزياء",n:"ملابس عصرية فاخرة",p:95000},
+{c:"عطور",n:"عطر فاخر ثبات طويل",p:120000},
+{c:"حقائب وأحذية",n:"حقيبة يد فاخرة",p:180000},
+{c:"اكسسوارات موبايل",n:"اكسسوار موبايل عصري",p:25000}
 ];
-let custom=JSON.parse(localStorage.getItem('luxe_final')||'[]'),active="الكل",cart=[],sum=0,tmp="";
-let catsEl=document.getElementById('cats');
-CATS.forEach((n,i)=>{
-let d=document.createElement('div');d.className='cat'+(n==active?' active':'');
-let img=i==0?'https://cdn-icons-png.flaticon.com/512/3081/3081559.png':icons[i-1];
-d.innerHTML=`<div class="circle"><img src="${img}"></div><h3>${EN[i]}</h3>`;
-d.onclick=()=>{active=n;document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));d.classList.add('active');render()};
-catsEl.appendChild(d);
-});
-fi.addEventListener('change',e=>{let r=new FileReader();r.onload=ev=>{tmp=ev.target.result;pv.src=tmp;pv.style.display='block'};r.readAsDataURL(e.target.files[0])});
-function getAll(){return [...DEF,...custom]}
-function render(){
-let list=getAll();if(active!="الكل") list=list.filter(x=>x.c==active);
-let q=document.getElementById('q').value.trim();if(q) list=list.filter(x=>x.n.includes(q));
-grid.innerHTML=list.map((p,idx)=>{
-let src=p.i||icons[CATS.indexOf(p.c)-1]||icons[0];
-return `<div class="card"><img src="${src}"><div class="info"><h4 style="font-size:12px;margin:0">${p.n}</h4><b style="color:#c9a96e">${p.p.toLocaleString()} د.ع</b><button onclick="add(${p.p},'${p.n}')" style="width:100%;background:#111;color:#fff;border:0;padding:8px;border-radius:6px;margin-top:6px">اضف للسلة</button></div></div>`
-}).join('');
-}
-function save(){
-let c=fc.value,n=fn.value.trim(),p=parseInt(fp.value),d=fd.value.trim();
-if(!n||!p) return alert('اكتب الاسم والسعر');
-custom.push({c,n,p,d,i:tmp});localStorage.setItem('luxe_final',JSON.stringify(custom));render();alert('تم ✓');A.style.display='none';fn.value='';fp.value='';tmp='';pv.style.display='none';
-}
-function add(p,n){cart.push({n,p});sum+=p;cnt.innerText=cart.length;tot.innerText=sum.toLocaleString();}
-function order(){if(!cart.length) return alert('السلة فارغة');let t=cart.map(c=>c.n+' - '+c.p).join('%0A');window.open('https://wa.me/9647822642223?text=طلب:%0A'+t+'%0Aالمجموع:'+sum,'_blank');}
-let cl=0,last=0;L.addEventListener('click',()=>{let now=Date.now();if(now-last>2000) cl=0;last=now;cl++;if(cl>=5){let ps=prompt('كلمة السر:');if(ps==='hasry2024'){addBtn.style.display='block';alert('انفتح ✓')}else if(ps!==null) alert('خطأ');cl=0;}});
-render();
-</script>
-</body>
-</html>
+let custom=JSON.parse(localStorage.getItem('asri_final_all')||'[]'),active="الكل",cart=[],sum=0,tmp="";
+function openAdmin(){document.getElementById('admin').style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
+function closeAdmin(){document.getElementById('admin').style.display='none';}
+const catsEl=document.getElementById('cats');
+CATS.forEach(o=>{
+let d=document.createElement('div');d.className='cat'+(o.n==active?' active':'');
+d.innerHTML=`<b>${o.i}</b><span>${o.n}</span>`;
+d.onclick
