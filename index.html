@@ -76,6 +76,12 @@ function removeItem(i){cart.splice(i,1);saveCart();renderCartItems();updateCartU
 function orderNow(){if(cart.length===0)return alert('السلة فارغة');let name=custName.value.trim(),phone=custPhone.value.trim(),addr=custAddr.value.trim();if(!name||!phone)return alert('اكتب اسمك ورقمك');let total=0,msg=`طلب جديد من السوق العصري%0A%0A`;cart.forEach(x=>{msg+=`${x.n} × ${x.qty} = ${(x.p*x.qty).toLocaleString()} د.ع%0A`;total+=x.p*x.qty;});msg+=`%0Aالمجموع: ${total.toLocaleString()} د.ع%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0Aالعنوان: ${addr}`;window.open('https://wa.me/'+WA_NUMBER+'?text='+msg,'_blank');}
 function openPage(type){let m=pageModal,t=pageTitle,c=pageContent;if(type==='about'){t.innerText='من نحن';c.innerHTML='السوق العصري متجر عراقي يوفر منتجات أصلية بأسعار مناسبة وتوصيل لكل العراق.';}if(type==='contact'){t.innerText='اتصل بنا';c.innerHTML='واتساب: 07822642223<br><a href="https://wa.me/9647822642223" style="display:block;background:#25D366;color:#fff;text-align:center;padding:12px;border-radius:10px;text-decoration:none;margin-top:10px;font-weight:900">راسلنا واتساب</a>';}m.style.display='flex';}
 render();
+  history.pushState(null, "");
+window.onpopstate = function(){
+document.getElementById('productModal').classList.remove('show');
+document.getElementById('cartPage').classList.remove('show');
+history.pushState(null, "");
+};
 </script>
 </body>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </html>
